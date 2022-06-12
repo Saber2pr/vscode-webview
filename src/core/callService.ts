@@ -1,4 +1,4 @@
-import { vscode } from './acquireVsCodeApi'
+import { mockVscodeApi, vscode } from './acquireVsCodeApi'
 import { MessageIncomeType, MessageResponseType, MessageTypeMap } from './type'
 
 export const callService = <
@@ -17,6 +17,13 @@ export const callService = <
     }
 
     const next = vscode.postMessage(messageIncome)
+
+    // hook message
+    if (mockVscodeApi.hook) {
+      mockVscodeApi.hook(messageIncome)
+    }
+
+    // for mock
     if (vscode.__mock) {
       const promiseRequest = next as any as Promise<any>
       promiseRequest.then(resolve)
