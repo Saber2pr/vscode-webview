@@ -15,7 +15,9 @@
   "main": "./lib/index.js",
   "scripts": {
     "start": "tsc --watch",
-    "release": "standard-version"
+    "release": "standard-version",
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@types/vscode": "^1.57.0",
