@@ -1,13 +1,5 @@
+import { vscode } from './acquireVsCodeApi'
 import { MessageIncomeType, MessageResponseType, MessageTypeMap } from './type'
-
-declare const acquireVsCodeApi: () => {
-  postMessage(value: MessageIncomeType): void
-  [k: string]: any
-}
-
-const isInVscode = typeof acquireVsCodeApi === 'function'
-
-export const vscode = isInVscode ? acquireVsCodeApi() : null
 
 export const callService = <
   T extends MessageTypeMap,
@@ -17,15 +9,15 @@ export const callService = <
   params: T[U]['params']
 ) =>
   new Promise<T[U]['response']>(async resolve => {
-    const eventId = setTimeout(() => { })
+    const eventId = setTimeout(() => {})
     const messageIncome: MessageIncomeType<any> = {
       service,
       params,
-      eventId
+      eventId,
     }
-    
+
     const next = vscode.postMessage(messageIncome)
-    if(vscode.__mock) {
+    if (vscode.__mock) {
       const promiseRequest = next as any as Promise<any>
       promiseRequest.then(resolve)
       return
@@ -33,7 +25,11 @@ export const callService = <
 
     const handle = (event: MessageEvent) => {
       if (event.data) {
-        const { service: serviceUri, response, eventId: resId } = event.data as MessageResponseType
+        const {
+          service: serviceUri,
+          response,
+          eventId: resId,
+        } = event.data as MessageResponseType
         if (serviceUri === service && eventId === resId) {
           console.log(`[Client] ${service}:`, response)
           resolve(response)
