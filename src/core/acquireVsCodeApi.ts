@@ -5,7 +5,7 @@ declare const acquireVsCodeApi: () => {
   [k: string]: any
 }
 
-const isInVscode = typeof acquireVsCodeApi === 'function'
+export const isInVscode = typeof acquireVsCodeApi === 'function'
 
 export const mockVscodeApi = {
   __mock: true,
