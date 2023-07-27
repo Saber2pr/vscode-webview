@@ -3,12 +3,9 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
+    "skipLibCheck": true,
     "outDir": "./lib",
-    "esModuleInterop": true,
-    "lib": [
-     "dom",
-     "es2015"
-    ]
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "lib"]
