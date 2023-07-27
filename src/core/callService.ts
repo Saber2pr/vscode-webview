@@ -38,7 +38,7 @@ export const callService = <
           eventId: resId,
         } = event.data as MessageResponseType
         if (serviceUri === service && eventId === resId) {
-          console.log(`[Client] ${service}:`, response)
+          console.log(`[Client] ${String(service)}:`, response)
           resolve(response)
           window.removeEventListener('message', handle)
         }
