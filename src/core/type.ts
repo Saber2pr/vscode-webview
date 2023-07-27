@@ -9,19 +9,20 @@ export type MessageTypeMap = {
 
 export type MessageIncomeType<
   T extends keyof MessageTypeMap = keyof MessageTypeMap
-  > = {
-    eventId: number
-    service: T
-    params: MessageTypeMap[T]['params']
-  }
+> = {
+  eventId: number
+  service: T
+  params: MessageTypeMap[T]['params']
+}
 
 export type MessageResponseType<
   T extends keyof MessageTypeMap = keyof MessageTypeMap
-  > = {
-    eventId: number
-    service: T
-    response: MessageTypeMap[T]['response']
-  }
+> = {
+  eventId: number
+  service: T
+  response: MessageTypeMap[T]['response']
+  success: boolean
+}
 
 export type HandleMap<T extends MessageTypeMap, U extends keyof T = keyof T> = {
   [key in U]: (
