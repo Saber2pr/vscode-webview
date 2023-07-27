@@ -1,6 +1,6 @@
 {
   "name": "@saber2pr/vscode-webview",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Vscode Webview Utils.",
   "repository": {
     "type": "git",
